@@ -2,14 +2,15 @@ import WarehouseListItem from './WarehouseListItem';
 import useWarehouses from '../services/hooks/useWarehouses';
 import List from '@mui/material/List';
 import { Box, Paper } from '@mui/material';
-import Calendar from './calendar';
+import Calendar from './Calendar';
 import { useEffect, useState } from 'react';
+import useBusinessHours from '../services/hooks/useBusinessHours';
 
 const WarehouseList = () => {
   const { warehouses, isLoading, isError } = useWarehouses();
   const [warehouseId, setWarehouseId] = useState<number>(0)
+  const { businessHours, isLoading: isBusinessHoursLoading, isError: isBusinessHoursError } = useBusinessHours(warehouseId);
 
-  console.log({ warehouseId })
   useEffect(() => {
     if (warehouses) {
       setWarehouseId(warehouses?.[0]?.id)
@@ -36,7 +37,9 @@ const WarehouseList = () => {
         }
       </List>
       <Box sx={{ flexBasis: 0, flexGrow: 1 }}>
-        <Calendar title={'asd'} warehouseId={warehouseId} />
+        {!isBusinessHoursLoading &&
+          <Calendar warehouseId={warehouseId} businessHours={businessHours} />
+        }
       </Box>
     </Paper>
   );
