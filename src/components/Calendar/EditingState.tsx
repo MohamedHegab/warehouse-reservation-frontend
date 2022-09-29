@@ -77,7 +77,7 @@ const EditingStateComponent: React.FC<editingStateComponentType> = ({
     );
   };
 
-  const handleUpdateReservedSlot = (updated: Appointment) => {
+  const handleUpdateReservedSlot = (updated: any) => {
     const id = Object.keys(updated)[0];
     const index = reservedSlots.findIndex(
       ({ uuid }: { uuid: string }) => uuid === id

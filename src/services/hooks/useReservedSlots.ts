@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import fetcher from '../fetcher';
-import ReservedSlot from '../../models/ReservedSlot'
+import { ReservedSlot } from '../../models/types'
 
 export async function addReservedSlot(warehouseId: number, reservedSlot: ReservedSlot) {
   return fetcher(`warehouses/${warehouseId}/reserved_slots`, 'POST', reservedSlot)
