@@ -106,7 +106,7 @@ const Calendar: React.FC<Props> = ({ warehouseId, businessHours }) => {
             endDayHour={24}
             timeTableCellComponent={TimeTableCell}
             excludedDays={excludedDays()}
-            cellDuration={60}
+            cellDuration={15}
           />
           <Toolbar />
           <DateNavigator />
