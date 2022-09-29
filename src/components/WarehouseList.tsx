@@ -29,7 +29,7 @@ const WarehouseList = () => {
 
   return (
     <Paper elevation={5} sx={{ display: 'flex' }}>
-      <List sx={{ flexBasis: 0, flexGrow: 1 }}>
+      <List sx={{ flexBasis: 0, flexGrow: 0.25 }}>
         {
           warehouses.map((warehouse: any) => (
             <WarehouseListItem warehouse={warehouse} key={warehouse.id} selectedWarehouseId={warehouseId} onClick={() => setWarehouseId(warehouse.id)} />
