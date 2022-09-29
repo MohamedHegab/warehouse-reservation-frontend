@@ -105,7 +105,7 @@ const Calendar: React.FC<Props> = ({ warehouseId, businessHours }) => {
     const index = reservedSlots.findIndex(({ uuid }) => uuid === response.uuid)
     if (index > -1) {
       mutate(async () => {
-        return [...reservedSlots, response]
+        return [...reservedSlots.splice(index, 1, response)]
       }, { optimisticData: [...reservedSlots.splice(index, 1, response)] });
     }
   }
@@ -116,7 +116,6 @@ const Calendar: React.FC<Props> = ({ warehouseId, businessHours }) => {
       case 'create':
         createReceiveSlot(data)
         break;
-
       case 'update':
         updateReceiveSlot(data)
         break;
@@ -175,7 +174,7 @@ const Calendar: React.FC<Props> = ({ warehouseId, businessHours }) => {
 
     mutate(async () => {
       return [...reservedSlots, await updateReservedSlot(warehouseId, id, reservedSlot)]
-    }, { optimisticData: [...reservedSlots.splice(index, 1, reservedSlot)], rollbackOnError: true, revalidate: false });
+    }, { optimisticData: [...reservedSlots.splice(index, 1)], rollbackOnError: true, revalidate: false });
   }
 
   const [addedAppointment, setAddedAppointment] = React.useState({})
